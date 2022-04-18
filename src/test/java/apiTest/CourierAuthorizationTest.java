@@ -86,9 +86,10 @@ public class CourierAuthorizationTest {
     public void authorizationCourierWithoutPasswordTest() {
         LoginModel courierCredentials = new LoginModel(login, null);
         courierClientSteps.loginCourier(courierCredentials)
-                .assertThat().body("message", equalTo("Недостаточно данных для входа"))
+                .assertThat()
+                .statusCode(400)
                 .and()
-                .statusCode(400);
+                .body("message", equalTo("Недостаточно данных для входа"));
     }
 
     @Test
